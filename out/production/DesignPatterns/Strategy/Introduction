@@ -1,0 +1,91 @@
+Strategy design pattern is behavioral design pattern
+where we choose a specific implementation of algorithm or task in run time(NOTE)
+ – out of multiple other implementations for same task.
+ - More Important the code should allow us to accomodate new Algorithm(Strategy)
+   without breaking the existing code
+
+
+
+The important point is that these implementations are interchangeable
+– based on task a implementation may be picked without disturbing the application workflow.
+
+
+
+Introduction
+
+Strategy pattern involves removing an algorithm from its host class
+and putting it in separate class -- ( eg FaceBookStrategy Here)
+so that in the same programming context there might be different algorithms (i.e. strategies),
+which can be selected in runtime.
+
+
+Strategy pattern enables a client code to choose from a family of related
+but different algorithms
+and gives it a simple way to choose any of the algorithm in runtime depending on the client context.
+
+
+Driven by Open/closed Principle
+This pattern is based on Open/closed principle.
+ We don’t need to modify the context [closed for modification],
+ but can choose and add any implementation [open for extension].
+
+
+-Advantage
+For example, in Collections.sort()
+– we don’t need to change the sort method to achieve different sorting results.
+We can just supply different comparators in runtime.
+
+
+
+Design Participants
+In Strategy pattern, we first create an abstraction of algorithm.
+This is an interface having the abstract operation.
+Then we create specific implementations of this abstraction and these are called strategies.
+
+A client will always call the abstraction,
+and will pass a context object.
+This context object will decide which strategy to use.
+
+
+Problem Statement
+
+I want to design a social media application
+which allows me to connect to my friends on all four social platforms
+i.e. Facebook, Google Plus, Twitter and Orkut (for example sake).
+Now I want that client should be able ask the name of friend and desired platform
+– then my application should connect to him transparently.
+
+
+
+Advantages
+More importantly, if I want to add more social platforms into application
+then application code should accommodate it without breaking the design.
+
+
+
+Solution with strategy design pattern
+
+In above problem, we have an operation which can be done in multiple ways (connect to friend)
+and user can choose desired way on runtime.
+So it’s good candidate for strategy design pattern.
+
+
+
+
+To implement the solution, let’s design one participant one at a time.
+
+ISocialMediaStrategy – The interface which abstract the operation.
+SocialMediaContext – The context which determines the implementation.
+Implementations – Various implementations of ISocialMediaStrategy.
+                E.g. FacebookStrategy, GooglePlusStrategy, TwitterStrategy and OrkutStrategy.
+
+
+
+Summary
+This pattern defines a set of related algorithm and encapsulate them in separated classes,
+and allows client to choose any algorithm at run time.
+It allows to add new algorithm without modifying existing algorithms (NOTE) or context class,
+which uses algorithm or strategies
+Strategy is a behavioral pattern in Gang of Four Design pattern list.
+Strategy pattern is based upon Open Closed design principle of SOLID principals.
+Combination of Collections.sort() and Comparator interface is an solid example of Strategy pattern.

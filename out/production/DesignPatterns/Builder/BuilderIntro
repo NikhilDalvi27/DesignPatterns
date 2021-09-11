@@ -1,0 +1,112 @@
+The builder pattern, as name implies, is an alternative way to construct complex objects.
+This pattern should be used when we want to build different immutable objects
+using the same object building process.
+
+
+The only big difference between the builder pattern and the abstract factory pattern
+is that builder provides us more control over the object creation process and that’s it.
+
+Apart from it, there are no major differences.
+
+A builder pattern is more like fluent interface.
+A fluent interface is normally implemented by using method cascading (or method chaining).
+
+
+1. Definition
+Builder pattern aims to “Separate the construction of a complex object from its representation
+ so that the same construction process can create different representations.”
+
+Meaning ... we can handle the cases
+where in there is  difference in the number of parameters
+required for the initialization of the object
+
+
+2 Where we need Builder Pattern
+We already know the benefits of immutability and immutable instances in application.
+If you have any questions about it, let me remind you of the String class in Java.
+The builder pattern helps us in creating immutable classes with a large set of state attributes.
+
+
+Let’s discuss a common problem in our application.
+In any user management module, primary entity is User, let’s say. Ideally and practically as well,
+once a user object is fully created, we will not want to change it’s state.
+ It simply does not make sense, right?
+
+
+Now, let’s assume, our User object has following 5 attributes
+ i.e. firstName, lastName, age, phone and address.
+
+In normal practice, if we want to make a immutable User class,
+then we must pass all five information
+as parameters to constructor.
+
+It will look like this:
+
+
+
+public User (String firstName, String lastName, int age, String phone, String address){
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.phone = phone;
+    this.address = address;
+}
+
+
+Very good.
+Now what if only firstName and lastName are mandatory and rest 3 fields are optional.
+Problem !! We need more constructors.
+
+So we will be needing lot like  these constructors in that case
+with firstName and LastName present in all of them
+
+
+public User (String firstName, String lastName, int age, String phone){ ... }
+public User (String firstName, String lastName, String phone, String address){ ...  }
+public User (String firstName, String lastName, int age){ ...   }
+public User (String firstName, String lastName){ ...    }
+
+We will need some more like above. Still can manage?
+Now let’s introduce our sixth attribute i.e. salary. Now it is problem.
+
+
+One way is to create more constructors,
+and another is to lose the immutability and introduce setter methods.
+You choose either of both options, you lose something, right?
+
+
+Here, the builder pattern will help you to consume additional attributes
+while retaining the immutability of the User class.
+
+
+
+
+
+3. Implementing Builder Pattern
+Let’s solve the above problem in code.
+The given solution uses an additional class UserBuilder
+which helps us in building desired User instance with all mandatory attributes
+and combination of optional attributes, without losing the immutability.
+
+NOTE
+Refer the User Class
+
+
+
+5.  Benefits and Advantages of Builder Pattern
+Undoubtedly, the number of lines of code increase at least to double in the builder pattern,
+but the effort pays off in terms of design flexibility and much more readable code
+
+
+The parameters to the constructor are reduced
+and are provided in highly readable chained method calls.
+This way there is no need to pass in null for optional parameters to the constructor
+while creating the instance of a class.
+
+Another advantage is that an instance is always instantiated in a complete state
+rather than sitting in an incomplete state until the developer calls (if ever calls)
+the appropriate “setter” method to set additional fields.
+
+And finally, we can build immutable objects without much complex logic in the object building process.
+
+
